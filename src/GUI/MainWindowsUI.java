@@ -56,7 +56,7 @@ public class MainWindowsUI {
         JMenuItem miAbout = new JMenuItem("About...");
         miAbout.addActionListener(e ->
             JOptionPane.showMessageDialog(frame,
-                "VRMS Developed by Stephen Noh for the final project of CPSY200A-Fall 2025",
+                "VRMS Developed by Changbeom(Stephen) Noh for the final project of CPSY200A-Fall 2025",
                 "About", JOptionPane.INFORMATION_MESSAGE)
         );
         mApp.add(miAbout);

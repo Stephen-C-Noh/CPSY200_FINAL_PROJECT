@@ -64,7 +64,11 @@ public class CustomerManagementPanel extends JPanel {
         customersModel = new DefaultTableModel(new Object[]{
                 "ID", "First", "Last", "Phone", "Email", "Active", "Discount", "Note"
         }, 0) {
-            @Override public boolean isCellEditable(int r, int c) { return false; }
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+			@Override public boolean isCellEditable(int r, int c) { return false; }
             @Override public Class<?> getColumnClass(int c) {
                 if (c == 0) return Integer.class;
                 if (c == 5) return Boolean.class;
@@ -303,11 +307,25 @@ public class CustomerManagementPanel extends JPanel {
                 "Delete customer #" + id + "?",
                 "Confirm Delete", JOptionPane.YES_NO_OPTION);
         if (confirm != JOptionPane.YES_OPTION) return;
+        
+         
 
-        try (Connection cn = DB.getConnection();
+        try (Connection cn = DB.getConnection(); PreparedStatement pps = cn.prepareStatement("SELECT COUNT(rental_id) FROM rental WHERE customer_id=?");
              PreparedStatement ps = cn.prepareStatement("DELETE FROM customer WHERE customer_id=?")) {
-            ps.setInt(1, id);
-            int count = ps.executeUpdate();
+            pps.setInt(1, id);
+        	int rentalCount = 0;
+        	try(ResultSet rs = pps.executeQuery()){
+        		if(rs.next()) {
+        			rentalCount = rs.getInt(1);
+        		}
+        	}
+        	if (rentalCount > 0) {
+        		showError("This customer has "+rentalCount+" rental request(s). Please delete those request first and Try again.");
+        		return;
+        	}
+        	
+        	ps.setInt(1, id);
+        	int count = ps.executeUpdate();
             if (count == 1) {
                 lblStatus.setText("Deleted customer #" + id);
                 clearFormForNew();
@@ -316,7 +334,7 @@ public class CustomerManagementPanel extends JPanel {
                 showError("Delete failed: no such customer.");
             }
         } catch (SQLException ex) {
-            showError("Delete failed: " + ex.getMessage());
+            showError("Delete failed: \n" + ex.getMessage()+"\n");
         }
     }
 

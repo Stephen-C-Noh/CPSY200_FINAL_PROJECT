@@ -6,7 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/steph/SAIT-ONEDRIVE/OneDrive - Southern Alberta Institute of Technology/SAIT/FALL2025/CPSY200A/Final Project/Part C/MariaDB/mariadb-java-client-3.5.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/steph/SAIT-ONEDRIVE/OneDrive - Southern Alberta Institute of Technology/SAIT/FALL2025/CPSY200A/Final Project/Part C/swingx-all-1.6.5-1.jar"/>
+	<classpathentry kind="lib" path="lib/mariadb-java-client-3.5.6.jar"/>
+	<classpathentry kind="lib" path="lib/swingx-all-1.6.5-1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
