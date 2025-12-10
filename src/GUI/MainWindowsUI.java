@@ -43,13 +43,14 @@ public class MainWindowsUI {
         	}
         });
 
-        frame.setJMenuBar(buildMenuBar()); // optional: global app menu
+        // add Menu Bar. Maybe I can add something more later.
+        frame.setJMenuBar(buildMenuBar()); 
         frame.add(tabs, BorderLayout.CENTER);
         frame.setSize(1100, 700);
         frame.setLocationByPlatform(true);
     }
 
-    // Simple app menu (optional)
+    // Simple app menu
     private JMenuBar buildMenuBar() {
         JMenuBar bar = new JMenuBar();
         JMenu mApp = new JMenu("VRMS");
